@@ -4,9 +4,9 @@ namespace Quiz.DB.Interfaces
 {
     public interface IQuizRepository
     {
-        QuizModel GetQuiz(int id);
-        IEnumerable<QuizResponseDataModel> GetAllQuizes();
-        IEnumerable<QuestionModel> GetQuestionOnQuizId(int id);
-        Dictionary<int, IList<AnswerModel>> GetAnswerOnQuizId(int id);
+        QuizDto GetQuiz(int id);
+        IEnumerable<QuizResponseDto> GetAllQuizes();
+        IEnumerable<QuestionDto> GetQuestionOnQuizId(int id);
+        Dictionary<int, IList<AnswerDto>> GetAnswerOnQuizId(int id);
     }
 }

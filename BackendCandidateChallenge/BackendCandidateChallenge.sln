@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizClient.Tests", "QuizCli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quiz.DB", "Quiz.DB\Quiz.DB.csproj", "{850A05A8-31E0-4D73-ACBE-55985A39019D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quiz.BAL", "Quiz.BAL\Quiz.BAL.csproj", "{626548C7-FFCB-4704-BE99-71441495DC5D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{850A05A8-31E0-4D73-ACBE-55985A39019D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{850A05A8-31E0-4D73-ACBE-55985A39019D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{850A05A8-31E0-4D73-ACBE-55985A39019D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{626548C7-FFCB-4704-BE99-71441495DC5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{626548C7-FFCB-4704-BE99-71441495DC5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{626548C7-FFCB-4704-BE99-71441495DC5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{626548C7-FFCB-4704-BE99-71441495DC5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -8,6 +8,11 @@ using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Quiz.BAL.Interfaces;
+using Quiz.BAL.Managers;
+using Quiz.BAL.Mapper;
+using Quiz.DB.Interfaces;
+using Quiz.DB.Repositories;
 
 namespace QuizService;
 
@@ -23,6 +28,10 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+
+        services.AddTransient<IQuizRepository, QuizRepository>();
+        services.AddTransient<IQuizManager, QuizManager>();
+        services.AddAutoMapper(typeof(QuizProfile));
         services.AddMvc();
         services.AddSingleton(InitializeDb());
         services.AddControllers();

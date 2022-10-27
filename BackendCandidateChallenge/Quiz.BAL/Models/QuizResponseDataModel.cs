@@ -1,4 +1,4 @@
-﻿namespace Quiz.DB.Models
+﻿namespace Quiz.BAL.Models
 {
     public class QuizResponseDataModel
     {

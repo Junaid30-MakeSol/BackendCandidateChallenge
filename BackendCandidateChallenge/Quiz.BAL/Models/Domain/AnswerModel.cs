@@ -1,4 +1,4 @@
-﻿namespace Quiz.DB.Models.Domain
+﻿namespace Quiz.BAL.Models.Domain
 {
     public class AnswerModel
     {
@@ -7,3 +7,4 @@
         public string Text { get; set; }
     }
 }
+
