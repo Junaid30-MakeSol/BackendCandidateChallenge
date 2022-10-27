@@ -4,6 +4,7 @@ using Quiz.BAL.Models;
 using Quiz.BAL.Models.Domain;
 using Quiz.DB.Interfaces;
 
+
 namespace Quiz.BAL.Managers
 {
     public class QuizManager : IQuizManager
@@ -16,26 +17,49 @@ namespace Quiz.BAL.Managers
             _mapper = mapper;
         }
 
-        public IEnumerable<QuizResponseDataModel> GetAllQuizes()
+        public List<QuizResponseDataModel> GetAllQuizes()
         {
             var data = _quizRepository.GetAllQuizes();
-            var result = _mapper.Map<IEnumerable<QuizResponseDataModel>>(data);
+            var result = _mapper.Map<List<QuizResponseDataModel>>(data);
             return result;
         }
 
-        public Dictionary<int, IList<AnswerModel>> GetAnswerOnQuizId(int id)
+
+        public QuizResponseDataModel GetQuestionandAnswerByQuizId(int id)
         {
-            var data = _quizRepository.GetAnswerOnQuizId(id);
-            var result = _mapper.Map<Dictionary<int, IList<AnswerModel>>>(data);
+            var quiz = _quizRepository.GetQuiz(id);
+            var questions = _quizRepository.GetQuestionOnQuizId(id);
+            var answers = _quizRepository.GetAnswerOnQuizId(id);
+
+            var result = new QuizResponseDataModel
+            {
+                Id = quiz.Id,
+                Title = quiz.Title,
+                Questions = questions.Select(question => new QuizResponseDataModel.QuestionItem
+                {
+                    Id = question.Id,
+                    Text = question.Text,
+                    Answers = answers.ContainsKey(question.Id)
+                        ? answers[question.Id].Select(answer => new QuizResponseDataModel.AnswerItem
+                        {
+                            Id = answer.Id,
+                            Text = answer.Text
+                        })
+                        : new QuizResponseDataModel.AnswerItem[0],
+                    CorrectAnswerId = question.CorrectAnswerId
+                }),
+                Links = new Dictionary<string, string>
+                {
+                    {"self", $"/api/quizzes/{id}"},
+                    {"questions", $"/api/quizzes/{id}/questions"}
+                }
+            };
+
             return result;
+
+
         }
 
-        public IEnumerable<QuestionModel> GetQuestionOnQuizId(int id)
-        {
-            var data = _quizRepository.GetQuestionOnQuizId(id);
-            var result = _mapper.Map<IEnumerable<QuestionModel>>(data);
-            return result;
-        }
 
         public QuizModel GetQuiz(int id)
         {

@@ -14,7 +14,7 @@ namespace Quiz.DB.Repositories
             _connection = connection;
         }
 
-        public IEnumerable<QuizResponseDto> GetAllQuizes()
+        public List<QuizResponseDto> GetAllQuizes()
         {
             var sql = "SELECT * FROM Quiz;";
             var quizzes = _connection.Query<QuizDto>(sql);
@@ -23,7 +23,7 @@ namespace Quiz.DB.Repositories
                 {
                     Id = quiz.Id,
                     Title = quiz.Title
-                });
+                }).ToList();
         }
        
         public QuizDto GetQuiz(int id)
@@ -32,10 +32,10 @@ namespace Quiz.DB.Repositories
             var quiz = _connection.QuerySingle<QuizDto>(quizSql, new { Id = id });
             return quiz;
         }
-        public IEnumerable<QuestionDto> GetQuestionOnQuizId(int id)
+        public List<QuestionDto> GetQuestionOnQuizId(int id)
         {
             var questionsSql = "SELECT * FROM Question WHERE QuizId = @QuizId;";
-            var questions = _connection.Query<QuestionDto>(questionsSql, new { QuizId = id });
+            var questions = _connection.Query<QuestionDto>(questionsSql, new { QuizId = id }).ToList();
             return questions;
         }
 

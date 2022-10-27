@@ -5,9 +5,8 @@ namespace Quiz.BAL.Interfaces
 {
     public interface IQuizManager
     {
-        IEnumerable<QuizResponseDataModel> GetAllQuizes();
-        IEnumerable<QuestionModel> GetQuestionOnQuizId(int id);
-        Dictionary<int, IList<AnswerModel>> GetAnswerOnQuizId(int id);
+        List<QuizResponseDataModel> GetAllQuizes();
         QuizModel GetQuiz(int id);
+        QuizResponseDataModel GetQuestionandAnswerByQuizId(int id);
     }
 }

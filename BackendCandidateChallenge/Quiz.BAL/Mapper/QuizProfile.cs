@@ -11,11 +11,6 @@ namespace Quiz.BAL.Mapper
         public QuizProfile()
         {
             CreateMap<QuizResponseDataModel, QuizResponseDto>().ReverseMap();
-
-            CreateMap<AnswerModel, AnswerDto>().ReverseMap();
-
-            CreateMap<QuestionModel, QuestionDto>().ReverseMap();
-
             CreateMap<QuizModel, QuizDto>().ReverseMap();
         }
     }
