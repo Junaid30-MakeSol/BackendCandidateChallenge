@@ -29,7 +29,7 @@ namespace Quiz.DB.Repositories
         public QuizDto GetQuiz(int id)
         {
             var quizSql = "SELECT * FROM Quiz WHERE Id = @Id;";
-            var quiz = _connection.QuerySingle<QuizDto>(quizSql, new { Id = id });
+            var quiz = _connection.QuerySingleOrDefault<QuizDto>(quizSql, new { Id = id });
             return quiz;
         }
         public List<QuestionDto> GetQuestionOnQuizId(int id)

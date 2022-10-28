@@ -25,9 +25,8 @@ namespace Quiz.BAL.Managers
         }
 
 
-        public QuizResponseDataModel GetQuestionandAnswerByQuizId(int id)
+        public QuizResponseDataModel GetQuestionandAnswerByQuizId(int id, QuizModel quiz)
         {
-            var quiz = _quizRepository.GetQuiz(id);
             var questions = _quizRepository.GetQuestionOnQuizId(id);
             var answers = _quizRepository.GetAnswerOnQuizId(id);
 

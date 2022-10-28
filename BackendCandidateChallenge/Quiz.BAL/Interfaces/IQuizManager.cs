@@ -7,6 +7,6 @@ namespace Quiz.BAL.Interfaces
     {
         List<QuizResponseDataModel> GetAllQuizes();
         QuizModel GetQuiz(int id);
-        QuizResponseDataModel GetQuestionandAnswerByQuizId(int id);
+        QuizResponseDataModel GetQuestionandAnswerByQuizId(int id, QuizModel quiz);
     }
 }

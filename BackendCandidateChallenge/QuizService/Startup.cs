@@ -29,12 +29,14 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddHttpContextAccessor();
-        services.AddScoped<IQuizRepository, QuizRepository>();
-        services.AddScoped<IQuizManager, QuizManager>();
+        services.AddTransient<IQuizRepository, QuizRepository>();
+        services.AddTransient<QuizManager>();
         services.AddAutoMapper(typeof(QuizProfile));
+
         services.AddMvc();
         services.AddSingleton(InitializeDb());
         services.AddControllers();
+ 
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

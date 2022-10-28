@@ -14,8 +14,9 @@ public class QuizController : Controller
 
     public QuizController(QuizManager quizManager,IDbConnection connection)
     {
-        _connection = connection;
         _quizManager = quizManager;
+        _connection = connection;
+       
     }
 
 
@@ -35,7 +36,7 @@ public class QuizController : Controller
     {
         var quiz = _quizManager.GetQuiz(id);
         if (quiz == null) return NotFound();
-        var result = _quizManager.GetQuestionandAnswerByQuizId(id);
+        var result = _quizManager.GetQuestionandAnswerByQuizId(id,quiz);
         return Ok(result);
     }
 
