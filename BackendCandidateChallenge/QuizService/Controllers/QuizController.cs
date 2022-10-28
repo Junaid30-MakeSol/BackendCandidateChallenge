@@ -35,7 +35,7 @@ public class QuizController : Controller
     public IActionResult Get(int id)
     {
         var quiz = _quizManager.GetQuiz(id);
-        if (quiz == null) return NotFound();
+        if (quiz == null) return NotFound($"Quiz data not found against this id : {id}");
         var result = _quizManager.GetQuestionandAnswerByQuizId(id,quiz);
         return Ok(result);
     }
