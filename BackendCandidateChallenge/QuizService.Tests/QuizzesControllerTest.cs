@@ -132,7 +132,28 @@ public class QuizzesControllerTest
                     Assert.NotNull(responseAnswer.Headers.Location);
                 }
 
+                //Updating Question, adding CorrectAnswerId and Text for each Question after generating Question and Answer
+
+                var questionPutApiEndPoint = $"{QuizApiEndPoint}{quizId}/questions/{q}";
+                int correctAnswerId = 1;
+                if (q == 1)
+                {
+                    correctAnswerId = 2;
+                }
+                if (q == 2)
+                {
+                    correctAnswerId = 3;
+                }
+
+                var questiontoupdate = new QuestionUpdateModel { CorrectAnswerId = correctAnswerId, Text = $"Question {q} is updated" };
+                content = new StringContent(JsonConvert.SerializeObject(questiontoupdate));
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                var responseupdateQuestion = await client.PutAsync(new Uri(testHost.BaseAddress, questionPutApiEndPoint), content);
+                Assert.Equal(HttpStatusCode.NoContent, responseupdateQuestion.StatusCode);
+
             }
+
+
 
         }
 
