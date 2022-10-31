@@ -153,11 +153,8 @@ public class QuizzesControllerTest
 
             }
 
-
-
         }
 
     }
 
-    }
 }
