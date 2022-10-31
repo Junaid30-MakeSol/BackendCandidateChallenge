@@ -94,10 +94,11 @@ public class QuizzesControllerTest
     [Fact]
     public async Task CreateQuizWithTwoQuestionsAsTestData()
     {
-       
+        const int quizId = 1;
+
         using (var testHost = new TestServer(new WebHostBuilder().UseStartup<Startup>()))
         {
-            
+            int q, a;
             var client = testHost.CreateClient();
             var quiz = new QuizCreateModel("Creating new Quiz");
             var content = new StringContent(JsonConvert.SerializeObject(quiz));
@@ -105,9 +106,37 @@ public class QuizzesControllerTest
             var response = await client.PostAsync(new Uri(testHost.BaseAddress, $"{QuizApiEndPoint}"), content);
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
             Assert.NotNull(response.Headers.Location);
+            // Posting Question loop
 
+            for (q = 1; q < 3; q++)
+            {
+                var QuestPostApiEndPoint = $"{QuizApiEndPoint}{quizId}/questions";
+                var question = new QuestionCreateModel($"Question id: {q}");
+                content = new StringContent(JsonConvert.SerializeObject(question));
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                var responseQuestion = await client.PostAsync(new Uri(testHost.BaseAddress, QuestPostApiEndPoint), content);
+                Assert.Equal(HttpStatusCode.Created, responseQuestion.StatusCode);
+                Assert.NotNull(responseQuestion.Headers.Location);
+
+                //Posting two answer for each question
+
+                for (a = 1; a < 3; a++)
+                {
+                    var answerPostApiEndPoint = $"{QuizApiEndPoint}{quizId}/questions/{q}/answers";
+                    var answer = new AnswerCreateModel($"My {a} Answer to {q} question ");
+                    content = new StringContent(JsonConvert.SerializeObject(answer));
+                    content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                    var responseAnswer = await client.PostAsync(new Uri(testHost.BaseAddress, answerPostApiEndPoint), content);
+                    Assert.Equal(HttpStatusCode.Created, responseAnswer.StatusCode);
+                    Assert.NotNull(responseAnswer.Headers.Location);
+                }
+
+            }
 
         }
+
+    }
 
     }
 }
