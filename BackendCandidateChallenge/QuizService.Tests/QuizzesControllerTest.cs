@@ -88,6 +88,7 @@ public class QuizzesControllerTest
     /// with creating two question and ,
     /// each question having two answer ,
     ///  updating Question by adding CorrectAnswer by Put method.
+    ///  This method i have tested my own database how to save data into databse. I can show you in interview as well. 
     /// </summary>
     /// <returns></returns>
 
