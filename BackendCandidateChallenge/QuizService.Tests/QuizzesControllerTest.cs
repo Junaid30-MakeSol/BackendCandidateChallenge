@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -79,5 +80,34 @@ public class QuizzesControllerTest
             var response = await client.PostAsync(new Uri(testHost.BaseAddress, $"{QuizApiEndPoint}"),content);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
+    }
+
+
+    /// <summary>
+    /// This Test method created to test functionality to generate a single Quiz with Id=1,
+    /// with creating two question and ,
+    /// each question having two answer ,
+    ///  updating Question by adding CorrectAnswer by Put method.
+    /// </summary>
+    /// <returns></returns>
+
+    [Fact]
+    public async Task CreateQuizWithTwoQuestionsAsTestData()
+    {
+       
+        using (var testHost = new TestServer(new WebHostBuilder().UseStartup<Startup>()))
+        {
+            
+            var client = testHost.CreateClient();
+            var quiz = new QuizCreateModel("Creating new Quiz");
+            var content = new StringContent(JsonConvert.SerializeObject(quiz));
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var response = await client.PostAsync(new Uri(testHost.BaseAddress, $"{QuizApiEndPoint}"), content);
+            Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+            Assert.NotNull(response.Headers.Location);
+
+
+        }
+
     }
 }

@@ -143,7 +143,7 @@ public class QuizController : Controller
 
     //// PUT api/quizzes/5/questions/6
     [HttpPut("{id}/questions/{qid}")]
-    public IActionResult PutQuestion(int id, int qid, [FromBody] QuestionUpdateModel value)
+    public IActionResult PutQuestion(int qid, [FromBody] QuestionUpdateModel value)
     {
         const string sql = "UPDATE Question SET Text = @Text, CorrectAnswerId = @CorrectAnswerId WHERE Id = @QuestionId";
         int rowsUpdated = _connection.Execute(sql, new { QuestionId = qid, Text = value.Text, CorrectAnswerId = value.CorrectAnswerId });

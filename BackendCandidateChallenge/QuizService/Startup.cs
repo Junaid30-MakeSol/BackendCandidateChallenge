@@ -55,22 +55,22 @@ public class Startup
 
     private IDbConnection InitializeDb()
     {
-        var connection = new SqliteConnection("Data Source=:memory:");
+        var connection = new SqliteConnection("Data Source=C:\\Sqlite\\gui\\BackendCandidateChallenge.db;");
         connection.Open();
 
         // Migrate up
-        var assembly = typeof(Startup).GetTypeInfo().Assembly;
-        var migrationResourceNames = assembly.GetManifestResourceNames()
-            .Where(x => x.EndsWith(".sql"))
-            .OrderBy(x => x);
-        if (!migrationResourceNames.Any()) throw new System.Exception("No migration files found!");
-        foreach (var resourceName in migrationResourceNames)
-        {
-            var sql = GetResourceText(assembly, resourceName);
-            var command = connection.CreateCommand();
-            command.CommandText = sql;
-            command.ExecuteNonQuery();
-        }
+        //var assembly = typeof(Startup).GetTypeInfo().Assembly;
+        //var migrationResourceNames = assembly.GetManifestResourceNames()
+        //    .Where(x => x.EndsWith(".sql"))
+        //    .OrderBy(x => x);
+        //if (!migrationResourceNames.Any()) throw new System.Exception("No migration files found!");
+        //foreach (var resourceName in migrationResourceNames)
+        //{
+        //    var sql = GetResourceText(assembly, resourceName);
+        //    var command = connection.CreateCommand();
+        //    command.CommandText = sql;
+        //    command.ExecuteNonQuery();
+        //}
 
         return connection;
     }
